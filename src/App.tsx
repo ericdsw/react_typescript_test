@@ -1,26 +1,55 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { connect, ConnectedProps } from 'react-redux';
+import { ConnectedRouter } from 'connected-react-router';
+import createTheme from './theme/createTheme';
+import { MuiThemeProvider, createStyles, makeStyles } from '@material-ui/core/styles';
+import { history } from './store';
+import { CssBaseline } from '@material-ui/core';
+import { RootState } from './store/createRootReducer';
 
-function App() {
+import MainWrapper from './components/MainWrapper';
+import DashboardPage from './components/BasePages/DashboardPage';
+
+import { showGlobalMessage } from './store/application/actions';
+
+const styles = createStyles({
+  root: {
+    minHeight: '100%',
+  },
+  content: {
+    flexGrow: 1,
+  },
+});
+
+const App : React.FC<Props> = props => {
+
+  const classes = makeStyles(styles)();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <ConnectedRouter history={history}>
+      <div className={classes.root}>
+        <MuiThemeProvider theme={createTheme(props.themeMode)}>
+          <CssBaseline />
+          <MainWrapper>
+            <DashboardPage>
+              <div>FOO</div>
+            </DashboardPage>
+          </MainWrapper>
+        </MuiThemeProvider>
+      </div>
+    </ConnectedRouter>
+  )
 }
 
-export default App;
+const mapStateToProps = (state: RootState) => ({
+  themeMode: state.app.themeMode
+});
+const reduxActions = { showGlobalMessage }
+const connector = connect(mapStateToProps, reduxActions);
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+interface Props extends PropsFromRedux {
+
+}
+
+export default connector(App);
