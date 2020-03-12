@@ -1,3 +1,5 @@
+// Note: AppThunk is just a convenience type that hides what redux-thunk returns.
+// Check that file if you want to see the complete return type
 import { AppThunk } from '../AppThunk';
 
 import {
@@ -8,6 +10,7 @@ import {
   SHOW_GLOBAL_ERROR_MESSAGE
 } from './types';
 
+// Any asyncronous call here must be called with await
 export const toggleDarkMode = (darkMode: boolean) : AppThunk => async dispatch => {
   dispatch({
     type: TOGGLE_DARK_MODE,

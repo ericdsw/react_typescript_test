@@ -10,6 +10,7 @@ import { RootState } from './store/createRootReducer';
 import MainWrapper from './components/MainWrapper';
 import DashboardPage from './components/BasePages/DashboardPage';
 
+// This is a call to a method that dispatches a redux action with thunk
 import { showGlobalMessage } from './store/application/actions';
 
 const styles = createStyles({
@@ -41,15 +42,25 @@ const App : React.FC<Props> = props => {
   )
 }
 
+// First declare MapStateToProps
 const mapStateToProps = (state: RootState) => ({
   themeMode: state.app.themeMode
 });
+
+// Next, declare the actions
 const reduxActions = { showGlobalMessage }
+
+// The `connect` function returns an instance of connector, which we
+// usually just chain call with the component as a parameter. Here
+// we will separate these calls to use the connector to generate
+// the PropsFromRedux type, which will shape the component properties
 const connector = connect(mapStateToProps, reduxActions);
-
 type PropsFromRedux = ConnectedProps<typeof connector>
-interface Props extends PropsFromRedux {
 
+// Create an interface that extends the PropsFronRedux types
+// All properties that are passed by the parent component are defined here.
+interface Props extends PropsFromRedux {
+  // Empty Implementation, only receive properties from redux
 }
 
 export default connector(App);
