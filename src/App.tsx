@@ -8,7 +8,7 @@ import { CssBaseline } from '@material-ui/core';
 import { RootState } from './store/createRootReducer';
 
 import MainWrapper from './components/MainWrapper';
-import DashboardPage from './components/BasePages/DashboardPage';
+import ItemListPage from './components/Items/ItemListPage';
 
 // This is a call to a method that dispatches a redux action with thunk
 import { showGlobalMessage } from './store/application/actions';
@@ -32,9 +32,7 @@ const App = (props: Props) => {
         <MuiThemeProvider theme={createTheme(props.themeMode)}>
           <CssBaseline />
           <MainWrapper>
-            <DashboardPage>
-              <div>FOO</div>
-            </DashboardPage>
+            <ItemListPage />
           </MainWrapper>
         </MuiThemeProvider>
       </div>
@@ -44,7 +42,7 @@ const App = (props: Props) => {
 
 // First declare MapStateToProps
 const mapStateToProps = (state: RootState) => ({
-  themeMode: state.app.themeMode
+  themeMode: state.app.themeMode,
 });
 
 // Next, declare the actions
