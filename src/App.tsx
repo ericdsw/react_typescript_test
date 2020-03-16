@@ -6,9 +6,10 @@ import { MuiThemeProvider, createStyles, makeStyles } from '@material-ui/core/st
 import { history } from './store';
 import { CssBaseline } from '@material-ui/core';
 import { RootState } from './store/createRootReducer';
+import { Switch } from 'react-router-dom';
 
 import MainWrapper from './components/MainWrapper';
-import ItemListPage from './components/Items/ItemListPage';
+import { routes, FallbackRoute } from './routing';
 
 // This is a call to a method that dispatches a redux action with thunk
 import { showGlobalMessage } from './store/application/actions';
@@ -32,7 +33,10 @@ const App = (props: Props) => {
         <MuiThemeProvider theme={createTheme(props.themeMode)}>
           <CssBaseline />
           <MainWrapper>
-            <ItemListPage />
+            <Switch>
+              {routes.map(route => (route))}
+              <FallbackRoute />
+            </Switch>
           </MainWrapper>
         </MuiThemeProvider>
       </div>
