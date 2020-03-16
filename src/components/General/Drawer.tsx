@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
 }));
 
-const Drawer : React.FC<Props> = props => {
+const Drawer = (props: Props) => {
 
   const classes = useStyles();
 

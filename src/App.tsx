@@ -22,7 +22,7 @@ const styles = createStyles({
   },
 });
 
-const App : React.FC<Props> = props => {
+const App = (props: Props) => {
 
   const classes = makeStyles(styles)();
 
