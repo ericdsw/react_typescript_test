@@ -26,8 +26,8 @@ const HomePage = () => {
 
   return (
     <DashboardPage>
-      <Typography variant='h5'>
-
+      <Typography gutterBottom variant='h5'>
+        Example Form
       </Typography>
       <Formik
         validationSchema={schema}

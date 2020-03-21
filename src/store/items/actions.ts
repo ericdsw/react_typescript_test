@@ -6,19 +6,20 @@ import {
   REQUEST_ITEMS_SUCCESS,
   REQUEST_ITEMS_ERROR
 } from './types';
+import { Dispatch, AnyAction } from 'redux';
 
-export const getItems = () : AppThunk => async dispatch => {
+export const getItems = () : AppThunk<Promise<AnyAction>> => async (dispatch: Dispatch) : Promise<AnyAction> => {
   dispatch({type: REQUEST_ITEMS});
   try {
     const result = await networkRequest<Item>("GET", "items", {});
-    dispatch({
+    return dispatch({
       type: REQUEST_ITEMS_SUCCESS,
       payload: {
         items: result.payload
       }
     })
   } catch (e) {
-    dispatch({
+    return dispatch({
       type: REQUEST_ITEMS_ERROR,
       payload: e
     })
