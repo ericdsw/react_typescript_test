@@ -4,7 +4,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import createTheme from './theme/createTheme';
 import { MuiThemeProvider, createStyles, makeStyles } from '@material-ui/core/styles';
 import { history } from './store';
-import { CssBaseline } from '@material-ui/core';
+import { CssBaseline, PaletteType } from '@material-ui/core';
 import { RootState } from './store/createRootReducer';
 import { Switch } from 'react-router-dom';
 
@@ -26,11 +26,16 @@ const styles = createStyles({
 const App = (props: Props) => {
 
   const classes = makeStyles(styles)();
+  const theme = createTheme({
+    palette: {
+      type: props.themeMode as PaletteType
+    }
+  });
 
   return (
     <ConnectedRouter history={history}>
       <div className={classes.root}>
-        <MuiThemeProvider theme={createTheme(props.themeMode)}>
+        <MuiThemeProvider theme={theme}>
           <CssBaseline />
           <MainWrapper>
             <Switch>

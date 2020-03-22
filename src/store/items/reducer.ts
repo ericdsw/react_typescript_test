@@ -1,34 +1,41 @@
-import { ItemState, ItemStateTypes } from './types';
+import { ItemState, ItemStateTypes } from "./types";
 import {
   REQUEST_ITEMS,
   REQUEST_ITEMS_SUCCESS,
   REQUEST_ITEMS_ERROR
-} from './types';
+} from "./types";
 
-const initialState : ItemState = {
+const initialState: ItemState = {
   requestingList: false,
   requestingListError: {
-    error: ''
+    error: ""
   },
   items: []
-}
+};
 
-export default function itemReducer(state = initialState, action: ItemStateTypes) {
-  switch(action.type) {
+export default function itemReducer(
+  state = initialState,
+  action: ItemStateTypes
+) {
+  switch (action.type) {
     case REQUEST_ITEMS:
       return {
-        ...state, requestingList: true,
-        requestingListError: { error: '' }
-      }
+        ...state,
+        requestingList: true,
+        requestingListError: { error: "" }
+      };
     case REQUEST_ITEMS_SUCCESS:
       return {
-        ...state, requestingList: false,
+        ...state,
+        requestingList: false,
         items: action.payload.items
-      }
+      };
     case REQUEST_ITEMS_ERROR:
       return {
-        ...state, requestingList: false, requestingListError: action.payload
-      }
+        ...state,
+        requestingList: false,
+        requestingListError: action.payload
+      };
     default:
       return state;
   }

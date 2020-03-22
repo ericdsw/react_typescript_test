@@ -9,7 +9,7 @@ import { toggleDrawer } from '../../store/application/actions';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   drawerList: {
-    width: 250,
+    width: theme.appDrawer.width,
   },
 }));
 
